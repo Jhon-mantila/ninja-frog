@@ -6,9 +6,11 @@ const JUMP_VELOCITY = -450.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var appeared: bool = false
+var allow_animation: bool = false
 var leaved_floor : bool = false
 var had_jump: bool = false
+var max_jump: int = 2
+var count_jump: int = 0
 
 func _ready():
 	$animacionesFrog.play("appear")
@@ -16,8 +18,10 @@ func _ready():
 func _physics_process(delta):
 	
 	if is_on_floor():
+		#usar las variables para resetiar las que controlan el salto
 		leaved_floor = false
 		had_jump = false
+		count_jump = 0
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -28,6 +32,12 @@ func _physics_process(delta):
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and right_to_jump():
+		if count_jump == 1:
+			allow_animation = false
+			$animacionesFrog.play("double_jump")
+		count_jump += 1
+		
+		print(count_jump)
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -43,8 +53,8 @@ func _physics_process(delta):
 	decide_animation()
 	
 func decide_animation():
-	
-	if not appeared : return
+	print("permitir salto: ", allow_animation)
+	if not allow_animation : return
 	
 	if velocity.x == 0:
 		#idle
@@ -68,7 +78,9 @@ func decide_animation():
 		pass
 
 func right_to_jump():
-	if had_jump: return false
+	if had_jump: 
+		if count_jump < max_jump: return true
+		else: return false
 	if is_on_floor(): 
 		had_jump = true
 		return true
@@ -80,8 +92,8 @@ func right_to_jump():
 ################
 func _on_animaciones_frog_animation_finished():
 	print($animacionesFrog.animation)
-	if $animacionesFrog.animation == "appear":
-		appeared = true # Replace with function body.
+	if $animacionesFrog.animation == "appear" || $animacionesFrog.animation == "double_jump":
+		allow_animation = true # Replace with function body.
 
 func _on_coyote_timer_timeout():
 	print("Inicio contador boom!")
