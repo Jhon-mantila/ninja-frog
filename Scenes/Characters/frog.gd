@@ -2,22 +2,32 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -450.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var appeared: bool = false
+var leaved_floor : bool = false
+var had_jump: bool = false
 
 func _ready():
 	$animacionesFrog.play("appear")
 
 func _physics_process(delta):
+	
+	if is_on_floor():
+		leaved_floor = false
+		had_jump = false
+	
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		if not leaved_floor:
+			$coyote_timer.start()
+			leaved_floor = true
+	velocity.y += gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and right_to_jump():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -57,7 +67,23 @@ func decide_animation():
 		$animacionesFrog.play("jump_up")
 		pass
 
+func right_to_jump():
+	if had_jump: return false
+	if is_on_floor(): 
+		had_jump = true
+		return true
+	elif not $coyote_timer.is_stopped(): 
+		had_jump = true
+		return true
+################
+# Señales 
+################
 func _on_animaciones_frog_animation_finished():
 	print($animacionesFrog.animation)
 	if $animacionesFrog.animation == "appear":
 		appeared = true # Replace with function body.
+
+func _on_coyote_timer_timeout():
+	print("Inicio contador boom!")
+	print($coyote_timer.wait_time)
+	

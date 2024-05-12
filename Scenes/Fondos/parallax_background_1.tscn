@@ -36,7 +36,6 @@ texture = ExtResource("3_1i2kw")
 motion_mirroring = Vector2(1152, 0)
 
 [node name="Sky" type="Sprite2D" parent="fondo_frente"]
-visible = false
-position = Vector2(575.5, 341)
-scale = Vector2(3.0026, 4.17284)
+position = Vector2(575.5, 354.5)
+scale = Vector2(3.0026, 4.33951)
 texture = ExtResource("4_haqqd")
