@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bru82jhjfot2f"]
+[gd_scene load_steps=11 format=3 uid="uid://bru82jhjfot2f"]
 
 [ext_resource type="PackedScene" uid="uid://dmk8fks2arvup" path="res://Scenes/Characters/frog.tscn" id="1_q64h8"]
 [ext_resource type="PackedScene" uid="uid://d0m5f2jwrd8n2" path="res://Scenes/Backgrounds/parallax_background_1.tscn" id="2_m0hyg"]
 [ext_resource type="PackedScene" uid="uid://bg75ne1r5trhv" path="res://Scenes/Enviroments/escenario_1.tscn" id="3_hw1w0"]
 [ext_resource type="PackedScene" uid="uid://blk5bb48i6ugo" path="res://Scenes/Enviroments/moving_platform_1.tscn" id="4_sl0ud"]
 [ext_resource type="PackedScene" uid="uid://dv0mcmp1esvhn" path="res://Scenes/Enemys/saw.tscn" id="5_56epw"]
+[ext_resource type="PackedScene" uid="uid://bihx28710s84e" path="res://Scenes/Enviroments/trampoline.tscn" id="6_0j6q6"]
 
 [sub_resource type="Curve2D" id="Curve2D_3vje4"]
 _data = {
@@ -53,7 +54,7 @@ _data = {
 [node name="Node2D" type="Node2D"]
 
 [node name="ninja_frog" parent="." instance=ExtResource("1_q64h8")]
-position = Vector2(2004, 91)
+position = Vector2(2413, 44)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_m0hyg")]
 
@@ -80,3 +81,6 @@ speed_scale = 0.1
 
 [node name="saw" parent="." instance=ExtResource("5_56epw")]
 position = Vector2(2117, 382)
+
+[node name="Trampoline" parent="." instance=ExtResource("6_0j6q6")]
+position = Vector2(2642, 484)
