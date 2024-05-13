@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bru82jhjfot2f"]
+[gd_scene load_steps=10 format=3 uid="uid://bru82jhjfot2f"]
 
 [ext_resource type="PackedScene" uid="uid://dmk8fks2arvup" path="res://Scenes/Characters/frog.tscn" id="1_q64h8"]
 [ext_resource type="PackedScene" uid="uid://d0m5f2jwrd8n2" path="res://Scenes/Backgrounds/parallax_background_1.tscn" id="2_m0hyg"]
 [ext_resource type="PackedScene" uid="uid://bg75ne1r5trhv" path="res://Scenes/Enviroments/escenario_1.tscn" id="3_hw1w0"]
 [ext_resource type="PackedScene" uid="uid://blk5bb48i6ugo" path="res://Scenes/Enviroments/moving_platform_1.tscn" id="4_sl0ud"]
+[ext_resource type="PackedScene" uid="uid://dv0mcmp1esvhn" path="res://Scenes/Enemys/saw.tscn" id="5_56epw"]
 
 [sub_resource type="Curve2D" id="Curve2D_3vje4"]
 _data = {
@@ -75,4 +76,7 @@ libraries = {
 "": SubResource("AnimationLibrary_a820p")
 }
 autoplay = "regular_moving"
-speed_scale = 0.453
+speed_scale = 0.1
+
+[node name="saw" parent="." instance=ExtResource("5_56epw")]
+position = Vector2(2117, 382)

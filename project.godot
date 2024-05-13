@@ -15,6 +15,12 @@ run/main_scene="res://Scenes/Screens/screen_1.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[layer_names]
+
+2d_physics/layer_1="Enviroment"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_5="Player"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

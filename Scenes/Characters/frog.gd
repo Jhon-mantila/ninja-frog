@@ -15,6 +15,7 @@ var double_jump: bool = false
 var ray_cast_dimension: float = 11.5
 var direction
 var stuck_on_wall: bool = false
+var healt: int = 100
 
 func _ready():
 	$animacionesFrog.play("appear")
@@ -60,7 +61,7 @@ func _physics_process(delta):
 				#resetemos el conteno de salto para que me deje saltar cuando este pegado a la pared
 				count_jump = 0
 				stuck_on_wall = true
-				print("Tocando la zona amarilla")
+				#print("Tocando la zona amarilla")
 			#print($rayCast_wallJump.get_collider())
 		else: stuck_on_wall = false
 	else: stuck_on_wall = false
@@ -136,3 +137,6 @@ func _on_coyote_timer_timeout():
 	print("Inicio contador boom!")
 	print($coyote_timer.wait_time)
 	
+func _on_damage_detection_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	healt -= 10
+	print("Daño detectado: ", healt)
