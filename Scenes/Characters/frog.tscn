@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dmk8fks2arvup"]
+[gd_scene load_steps=71 format=3 uid="uid://dmk8fks2arvup"]
 
 [ext_resource type="Texture2D" uid="uid://c8kmquumh8hja" path="res://Assets/Main Characters/Ninja Frog/Idle (32x32).png" id="1_dgbc4"]
 [ext_resource type="Script" path="res://Scenes/Characters/frog.gd" id="1_e6n0d"]
@@ -110,6 +110,10 @@ region = Rect2(480, 0, 96, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xnhg"]
 atlas = ExtResource("3_ips8g")
 region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kugsw"]
+atlas = ExtResource("2_fgt8j")
+region = Rect2(96, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n22n5"]
 atlas = ExtResource("4_vxce3")
@@ -333,6 +337,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_kugsw")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_n22n5")
 }, {
 "duration": 1.0,
@@ -466,13 +473,14 @@ script = ExtResource("1_e6n0d")
 
 [node name="animacionesFrog" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_roob4")
-animation = &"double_jump"
+animation = &"wall_jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_vkhmm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_top = 0
 limit_bottom = 658
 editor_draw_limits = true
 editor_draw_drag_margin = true
@@ -480,6 +488,9 @@ editor_draw_drag_margin = true
 [node name="coyote_timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="rayCast_wallJump" type="RayCast2D" parent="."]
+target_position = Vector2(11.5, 0)
 
 [connection signal="animation_finished" from="animacionesFrog" to="." method="_on_animaciones_frog_animation_finished"]
 [connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]

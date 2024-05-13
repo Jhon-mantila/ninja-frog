@@ -7,9 +7,8 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="ninja_frog" parent="." instance=ExtResource("1_28iek")]
-position = Vector2(589, 345)
+position = Vector2(2172, 334)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_1ablj")]
 
 [node name="TileMap" parent="." instance=ExtResource("2_27avr")]
-position = Vector2(36, 50)
