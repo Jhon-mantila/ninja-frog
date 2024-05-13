@@ -138,5 +138,7 @@ func _on_coyote_timer_timeout():
 	print($coyote_timer.wait_time)
 	
 func _on_damage_detection_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	#print(area_rid)
+	print(area.name) # muestra el nombre del area que collisiono
 	healt -= 10
 	print("Daño detectado: ", healt)

@@ -444,6 +444,7 @@ sources/0 = SubResource("TileSetAtlasSource_xeg4t")
 
 [node name="wall_jump_tile" type="TileMap" groups=["wall_jump"]]
 position = Vector2(3, 0)
+scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_q155d")
 format = 2
-layer_0/tile_data = PackedInt32Array(1114243, 1114112, 9, 0, 1114112, 9)
+layer_0/tile_data = PackedInt32Array(0, 1114112, 9)
