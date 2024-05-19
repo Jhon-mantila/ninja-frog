@@ -66,7 +66,6 @@ func _physics_process(delta):
 			#print($rayCast_wallJump.get_collider())
 		else: stuck_on_wall = false
 	else: stuck_on_wall = false
-			
 	
 	move_and_slide()
 	decide_animation()
@@ -116,13 +115,13 @@ func decide_animation():
 			#Salto
 			$animacionesFrog.play("jump_up")
 
-
 func collectFruit(fruitType: String):
 	var auxString = fruitType + "Points"
 	print("Recolete: ", fruitType, " variable: auxString: ", auxString, " Valor: ", GeneralRules[auxString])
 	var gainedPoint = GeneralRules[auxString]
 	fruitCount += gainedPoint
 	print("Puntos recolectados: ",fruitCount)
+
 	
 func right_to_jump():
 	if had_jump: 
