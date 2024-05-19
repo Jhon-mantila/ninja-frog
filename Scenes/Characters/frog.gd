@@ -16,6 +16,7 @@ var ray_cast_dimension: float = 11.5
 var direction
 var stuck_on_wall: bool = false
 var healt: int = 100
+var fruitCount: int = 0
 
 func _ready():
 	$animacionesFrog.play("appear")
@@ -42,7 +43,7 @@ func _physics_process(delta):
 			double_jump = true
 		count_jump += 1
 		
-		print(count_jump)
+		#print(count_jump)
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -115,6 +116,14 @@ func decide_animation():
 			#Salto
 			$animacionesFrog.play("jump_up")
 
+
+func collectFruit(fruitType: String):
+	var auxString = fruitType + "Points"
+	print("Recolete: ", fruitType, " variable: auxString: ", auxString, " Valor: ", GeneralRules[auxString])
+	var gainedPoint = GeneralRules[auxString]
+	fruitCount += gainedPoint
+	print("Puntos recolectados: ",fruitCount)
+	
 func right_to_jump():
 	if had_jump: 
 		if count_jump < max_jump: return true
@@ -129,16 +138,17 @@ func right_to_jump():
 # Señales 
 ################
 func _on_animaciones_frog_animation_finished():
-	print($animacionesFrog.animation)
+	#print($animacionesFrog.animation)
 	if $animacionesFrog.animation == "appear" || $animacionesFrog.animation == "double_jump":
 		allow_animation = true # Replace with function body.
 
 func _on_coyote_timer_timeout():
-	print("Inicio contador boom!")
-	print($coyote_timer.wait_time)
+	#print("Inicio contador boom!")
+	#print($coyote_timer.wait_time)
+	pass
 	
 func _on_damage_detection_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	#print(area_rid)
 	print(area.name) # muestra el nombre del area que collisiono
 	healt -= 10
-	print("Daño detectado: ", healt)
+	#print("Daño detectado: ", healt)

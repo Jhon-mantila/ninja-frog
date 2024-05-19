@@ -15,10 +15,15 @@ run/main_scene="res://Scenes/Screens/screen_1.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GeneralRules="*res://Scripts/general_rules.gd"
+
 [layer_names]
 
 2d_physics/layer_1="Enviroment"
 2d_physics/layer_2="Enemies"
+2d_physics/layer_3="Fruit"
 2d_physics/layer_5="Player"
 
 [rendering]

@@ -16,13 +16,13 @@ func _process(delta):
 			floor_detected = true
 			$ray_cast_floor_detection.target_position.y -= 6
 			init_spikeball()
-			print("Ha tocado el suelo:" , $ray_cast_floor_detection.target_position.y)
+			#print("Ha tocado el suelo:" , $ray_cast_floor_detection.target_position.y)
 	$SpikedBall.rotation = self.rotation
 
 func init_spikeball():
-	print("Objetivo inicial: ",$ray_cast_floor_detection.target_position.y)
+	#print("Objetivo inicial: ",$ray_cast_floor_detection.target_position.y)
 	var number_of_chain =($ray_cast_floor_detection.target_position.y - ray_cast_init_value) / 6
-	print("División : ", number_of_chain)
+	#print("División : ", number_of_chain)
 	$SpikedBall.position.y += (number_of_chain * 6)
 	
 	for i in range(number_of_chain):

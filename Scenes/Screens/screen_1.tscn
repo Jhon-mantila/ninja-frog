@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bru82jhjfot2f"]
+[gd_scene load_steps=13 format=3 uid="uid://bru82jhjfot2f"]
 
 [ext_resource type="PackedScene" uid="uid://dmk8fks2arvup" path="res://Scenes/Characters/frog.tscn" id="1_q64h8"]
 [ext_resource type="PackedScene" uid="uid://d0m5f2jwrd8n2" path="res://Scenes/Backgrounds/parallax_background_1.tscn" id="2_m0hyg"]
@@ -7,12 +7,28 @@
 [ext_resource type="PackedScene" uid="uid://dv0mcmp1esvhn" path="res://Scenes/Enemys/saw.tscn" id="5_56epw"]
 [ext_resource type="PackedScene" uid="uid://bihx28710s84e" path="res://Scenes/Enviroments/trampoline.tscn" id="6_0j6q6"]
 [ext_resource type="PackedScene" uid="uid://rl0l40o1rd2v" path="res://Scenes/Enemys/spike_ball.tscn" id="7_nr7c3"]
+[ext_resource type="PackedScene" uid="uid://utki8wt26clq" path="res://Scenes/Enviroments/fruit.tscn" id="8_rrxuy"]
 
 [sub_resource type="Curve2D" id="Curve2D_3vje4"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 1522, 164, 0, 0, 0, 0, 1866.8, 164, 0, 0, 0, 0, 1866.8, 284, 156.582, -69.9187, -156.582, 69.9187, 1522, 284)
 }
 point_count = 4
+
+[sub_resource type="Animation" id="Animation_1v850"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_bybyg"]
 resource_name = "regular_moving"
@@ -31,21 +47,6 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_1v850"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a820p"]
 _data = {
 "RESET": SubResource("Animation_1v850"),
@@ -55,7 +56,7 @@ _data = {
 [node name="Node2D" type="Node2D"]
 
 [node name="ninja_frog" parent="." instance=ExtResource("1_q64h8")]
-position = Vector2(5200, 463)
+position = Vector2(2797, 472)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_m0hyg")]
 
@@ -97,3 +98,25 @@ position = Vector2(3695, 294)
 
 [node name="SpikeBall4" parent="." instance=ExtResource("7_nr7c3")]
 position = Vector2(5199, 305)
+
+[node name="fruit" parent="." instance=ExtResource("8_rrxuy")]
+position = Vector2(5015, 348)
+fruitType = "bananas"
+
+[node name="fruit2" parent="." instance=ExtResource("8_rrxuy")]
+position = Vector2(5061, 350)
+
+[node name="fruit3" parent="." instance=ExtResource("8_rrxuy")]
+position = Vector2(4959, 349)
+fruitType = "cherries"
+
+[node name="fruit4" parent="." instance=ExtResource("8_rrxuy")]
+position = Vector2(2645, 196)
+fruitType = "bananas"
+
+[node name="fruit5" parent="." instance=ExtResource("8_rrxuy")]
+position = Vector2(2645, 273)
+
+[node name="fruit6" parent="." instance=ExtResource("8_rrxuy")]
+position = Vector2(2643, 356)
+fruitType = "cherries"
