@@ -18,5 +18,5 @@ func _process(delta):
 		$Clock.text = str(Time.get_time_dict_from_system().hour - 12) + " : " + str(Time.get_time_dict_from_system().minute) + " : " + str(Time.get_time_dict_from_system().second) 
 	else:
 		$Clock.text = str(Time.get_time_dict_from_system().hour) + " : " + str(Time.get_time_dict_from_system().minute) + " : " + str(Time.get_time_dict_from_system().second) 
-	print(Time.get_time_dict_from_system())
+	#print(Time.get_time_dict_from_system())
 	pass

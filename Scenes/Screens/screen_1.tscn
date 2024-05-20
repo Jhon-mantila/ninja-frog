@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bru82jhjfot2f"]
+[gd_scene load_steps=15 format=3 uid="uid://bru82jhjfot2f"]
 
 [ext_resource type="PackedScene" uid="uid://dmk8fks2arvup" path="res://Scenes/Characters/frog.tscn" id="1_q64h8"]
 [ext_resource type="PackedScene" uid="uid://bfgqxheddo34b" path="res://Scenes/Screens/player_info.tscn" id="1_rshbr"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bihx28710s84e" path="res://Scenes/Enviroments/trampoline.tscn" id="6_0j6q6"]
 [ext_resource type="PackedScene" uid="uid://rl0l40o1rd2v" path="res://Scenes/Enemys/spike_ball.tscn" id="7_nr7c3"]
 [ext_resource type="PackedScene" uid="uid://utki8wt26clq" path="res://Scenes/Enviroments/fruit.tscn" id="8_rrxuy"]
+[ext_resource type="PackedScene" uid="uid://c0xet1rf0byyr" path="res://Scenes/Enviroments/portal.tscn" id="10_506xt"]
 
 [sub_resource type="Curve2D" id="Curve2D_3vje4"]
 _data = {
@@ -58,8 +59,14 @@ _data = {
 
 [node name="CanvasLayer" parent="." instance=ExtResource("1_rshbr")]
 
+[node name="portal" parent="." instance=ExtResource("10_506xt")]
+position = Vector2(6294, 486)
+
+[node name="portal2" parent="." instance=ExtResource("10_506xt")]
+position = Vector2(6105, 358)
+
 [node name="ninja_frog" parent="." instance=ExtResource("1_q64h8")]
-position = Vector2(483, 284)
+position = Vector2(6198, 341)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_m0hyg")]
 
@@ -100,7 +107,7 @@ position = Vector2(3453, 260)
 position = Vector2(3695, 294)
 
 [node name="SpikeBall4" parent="." instance=ExtResource("7_nr7c3")]
-position = Vector2(5199, 305)
+position = Vector2(5199, 343)
 
 [node name="fruit" parent="." instance=ExtResource("8_rrxuy")]
 position = Vector2(5015, 348)

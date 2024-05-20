@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://dmk8fks2arvup"]
+[gd_scene load_steps=73 format=3 uid="uid://dmk8fks2arvup"]
 
 [ext_resource type="Texture2D" uid="uid://c8kmquumh8hja" path="res://Assets/Main Characters/Ninja Frog/Idle (32x32).png" id="1_dgbc4"]
 [ext_resource type="Script" path="res://Scenes/Characters/frog.gd" id="1_e6n0d"]
@@ -471,7 +471,10 @@ animations = [{
 radius = 8.5
 height = 22.0
 
-[node name="ninja_frog" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fuuhq"]
+size = Vector2(1, 5)
+
+[node name="ninja_frog" type="CharacterBody2D" groups=["ninja"]]
 scale = Vector2(2, 2)
 collision_layer = 16
 script = ExtResource("1_e6n0d")
@@ -481,12 +484,14 @@ sprite_frames = SubResource("SpriteFrames_roob4")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_vkhmm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_top = 0
 limit_bottom = 658
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
@@ -498,7 +503,6 @@ one_shot = true
 target_position = Vector2(11.5, 0)
 
 [node name="damage_detection" type="Area2D" parent="."]
-visible = false
 collision_layer = 16
 collision_mask = 2
 
@@ -506,15 +510,23 @@ collision_mask = 2
 position = Vector2(0.5, 4)
 shape = SubResource("CapsuleShape2D_bd7qx")
 
-[node name="damage_detection_fruit" type="Area2D" parent="."]
+[node name="area_collect_fruit" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_detection_fruit"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_collect_fruit"]
 position = Vector2(0.5, 4)
 shape = SubResource("CapsuleShape2D_bd7qx")
+
+[node name="area_for_portal" type="Area2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_for_portal"]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_fuuhq")
+debug_color = Color(0, 0.0313726, 0.0470588, 0.419608)
 
 [connection signal="animation_finished" from="animacionesFrog" to="." method="_on_animaciones_frog_animation_finished"]
 [connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_shape_entered" from="damage_detection" to="." method="_on_damage_detection_area_shape_entered"]
-[connection signal="area_shape_entered" from="damage_detection_fruit" to="." method="_on_damage_detection_area_shape_entered"]
+[connection signal="area_shape_entered" from="area_collect_fruit" to="." method="_on_damage_detection_area_shape_entered"]

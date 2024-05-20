@@ -27,6 +27,7 @@ step = 1.0
 rounded = true
 
 [node name="Label" type="Label" parent="ProgressBar"]
+layout_mode = 0
 offset_left = -43.0
 offset_top = 2.0
 offset_right = 27.0

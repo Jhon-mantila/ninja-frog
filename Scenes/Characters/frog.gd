@@ -149,5 +149,6 @@ func _on_coyote_timer_timeout():
 func _on_damage_detection_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	#print(area_rid)
 	print(area.name) # muestra el nombre del area que collisiono
-	healt -= 10
-	#print("Daño detectado: ", healt)
+	if area.name != "area_collect_fruit":
+		healt -= 10
+	print("Daño detectado: ", healt)
