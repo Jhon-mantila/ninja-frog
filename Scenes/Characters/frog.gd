@@ -17,12 +17,15 @@ var direction
 var stuck_on_wall: bool = false
 var healt: int = 100
 var fruitCount: int = 0
+var block_ninja = false
 
 func _ready():
 	$animacionesFrog.play("appear")
 	$rayCast_wallJump.target_position.x = ray_cast_dimension
 
 func _physics_process(delta):
+	
+	if block_ninja: return
 	
 	if is_on_floor():
 		#usar las variables para resetiar las que controlan el salto

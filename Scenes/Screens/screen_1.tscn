@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bru82jhjfot2f"]
+[gd_scene load_steps=21 format=3 uid="uid://bru82jhjfot2f"]
 
 [ext_resource type="PackedScene" uid="uid://dmk8fks2arvup" path="res://Scenes/Characters/frog.tscn" id="1_q64h8"]
 [ext_resource type="PackedScene" uid="uid://bfgqxheddo34b" path="res://Scenes/Screens/player_info.tscn" id="1_rshbr"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://rl0l40o1rd2v" path="res://Scenes/Enemys/spike_ball.tscn" id="7_nr7c3"]
 [ext_resource type="PackedScene" uid="uid://utki8wt26clq" path="res://Scenes/Enviroments/fruit.tscn" id="8_rrxuy"]
 [ext_resource type="PackedScene" uid="uid://c0xet1rf0byyr" path="res://Scenes/Enviroments/portal.tscn" id="10_506xt"]
+[ext_resource type="Script" path="res://Scenes/Screens/init_cutScene1.gd" id="11_vu2iy"]
 
 [sub_resource type="Curve2D" id="Curve2D_3vje4"]
 _data = {
@@ -55,9 +56,64 @@ _data = {
 "regular_moving": SubResource("Animation_bybyg")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cr1eh"]
+size = Vector2(424.002, 46)
+
+[sub_resource type="Animation" id="Animation_0w3wl"]
+resource_name = "to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nn1li"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ee5t1"]
+resource_name = "to_transparent"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jnyro"]
+_data = {
+"RESET": SubResource("Animation_nn1li"),
+"to_black": SubResource("Animation_0w3wl"),
+"to_transparent": SubResource("Animation_ee5t1")
+}
+
 [node name="Node2D" type="Node2D"]
 
-[node name="CanvasLayer" parent="." instance=ExtResource("1_rshbr")]
+[node name="PlayerInfo" parent="." instance=ExtResource("1_rshbr")]
 
 [node name="portal" parent="." instance=ExtResource("10_506xt")]
 position = Vector2(6294, 486)
@@ -65,12 +121,12 @@ position = Vector2(6294, 486)
 [node name="portal2" parent="." instance=ExtResource("10_506xt")]
 position = Vector2(6105, 358)
 
+[node name="TileMap" parent="." instance=ExtResource("3_hw1w0")]
+
 [node name="ninja_frog" parent="." instance=ExtResource("1_q64h8")]
 position = Vector2(6198, 341)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_m0hyg")]
-
-[node name="TileMap" parent="." instance=ExtResource("3_hw1w0")]
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(13, -4)
@@ -130,3 +186,37 @@ position = Vector2(2645, 273)
 [node name="fruit6" parent="." instance=ExtResource("8_rrxuy")]
 position = Vector2(2643, 356)
 fruitType = "cherries"
+
+[node name="fruit7" parent="." instance=ExtResource("8_rrxuy")]
+position = Vector2(5906, 224)
+fruitType = "cherries"
+
+[node name="fruit8" parent="." instance=ExtResource("8_rrxuy")]
+position = Vector2(6101, 265)
+fruitType = "bananas"
+
+[node name="init_cutScene1" type="Area2D" parent="."]
+collision_mask = 16
+script = ExtResource("11_vu2iy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="init_cutScene1"]
+position = Vector2(7346.98, 34)
+rotation = 1.5704
+shape = SubResource("RectangleShape2D_cr1eh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="init_cutScene1"]
+
+[node name="ColorRect" type="ColorRect" parent="init_cutScene1/CanvasLayer"]
+offset_left = -63.0
+offset_top = -40.0
+offset_right = 1205.0
+offset_bottom = 673.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="init_cutScene1"]
+libraries = {
+"": SubResource("AnimationLibrary_jnyro")
+}
+
+[connection signal="body_entered" from="init_cutScene1" to="init_cutScene1" method="_on_body_entered"]
+[connection signal="animation_finished" from="init_cutScene1/AnimationPlayer" to="init_cutScene1" method="_on_animation_player_animation_finished"]
