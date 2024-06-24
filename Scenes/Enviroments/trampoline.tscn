@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bihx28710s84e"]
+[gd_scene load_steps=17 format=3 uid="uid://bihx28710s84e"]
 
 [ext_resource type="Script" path="res://Scenes/Enviroments/trampoline.gd" id="1_kso4q"]
 [ext_resource type="Texture2D" uid="uid://b5q524se32dng" path="res://Assets/Traps/Trampoline/Idle.png" id="1_rjxnm"]
 [ext_resource type="Texture2D" uid="uid://p6i2gqecuj40" path="res://Assets/Traps/Trampoline/Jump (28x28).png" id="2_o70y3"]
+[ext_resource type="AudioStream" uid="uid://cysy0xvd5mc7m" path="res://Assets/Sonidos/funny-spring-jump-140378.mp3" id="4_i70kg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s8jb0"]
 atlas = ExtResource("1_rjxnm")
@@ -111,5 +112,8 @@ debug_color = Color(0, 0.6, 0.701961, 0.984314)
 modulate = Color(0.435294, 0.635294, 0.647059, 1)
 position = Vector2(-0.5, 9.25)
 shape = SubResource("RectangleShape2D_t8xop")
+
+[node name="AudioTrampoline" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_i70kg")
 
 [connection signal="body_entered" from="activation_area" to="." method="_on_activation_area_body_entered"]

@@ -12,6 +12,7 @@ func _process(delta):
 func _on_activation_area_body_entered(body):
 	print(body.name)
 	if body.name == "ninja_frog":
+		$AudioTrampoline.play()
 		$animation_trampoline.play("launch")
 		body.velocity.y = -800
 		#print(body.name)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bru82jhjfot2f"]
+[gd_scene load_steps=23 format=3 uid="uid://bru82jhjfot2f"]
 
 [ext_resource type="PackedScene" uid="uid://dmk8fks2arvup" path="res://Scenes/Characters/frog.tscn" id="1_q64h8"]
 [ext_resource type="PackedScene" uid="uid://bfgqxheddo34b" path="res://Scenes/Screens/player_info.tscn" id="1_rshbr"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://utki8wt26clq" path="res://Scenes/Enviroments/fruit.tscn" id="8_rrxuy"]
 [ext_resource type="PackedScene" uid="uid://c0xet1rf0byyr" path="res://Scenes/Enviroments/portal.tscn" id="10_506xt"]
 [ext_resource type="Script" path="res://Scenes/Screens/init_cutScene1.gd" id="11_vu2iy"]
+[ext_resource type="AudioStream" uid="uid://dn0phub0eamu3" path="res://Assets/Sonidos/pixel-song-19-31953_junta.mp3" id="12_kkf7h"]
+[ext_resource type="Script" path="res://Scenes/Screens/AudioFondo.gd" id="13_3isx3"]
 
 [sub_resource type="Curve2D" id="Curve2D_3vje4"]
 _data = {
@@ -126,7 +128,7 @@ grupo_portal = 2
 [node name="TileMap" parent="." instance=ExtResource("3_hw1w0")]
 
 [node name="ninja_frog" parent="." instance=ExtResource("1_q64h8")]
-position = Vector2(6198, 341)
+position = Vector2(5366, 466)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_m0hyg")]
 
@@ -221,10 +223,17 @@ libraries = {
 }
 
 [node name="portal3" parent="." instance=ExtResource("10_506xt")]
-position = Vector2(5406, 487)
+position = Vector2(3903, 423)
 
 [node name="portal4" parent="." instance=ExtResource("10_506xt")]
-position = Vector2(5607, 486)
+position = Vector2(5603, 488)
+
+[node name="AudioFondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_kkf7h")
+volume_db = -11.183
+autoplay = true
+script = ExtResource("13_3isx3")
 
 [connection signal="body_entered" from="init_cutScene1" to="init_cutScene1" method="_on_body_entered"]
 [connection signal="animation_finished" from="init_cutScene1/AnimationPlayer" to="init_cutScene1" method="_on_animation_player_animation_finished"]
+[connection signal="finished" from="AudioFondo" to="AudioFondo" method="_on_finished"]

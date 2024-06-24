@@ -19,6 +19,7 @@ var healt: int = 100
 var fruitCount: int = 0
 var block_ninja = false
 
+
 func _ready():
 	$animacionesFrog.play("appear")
 	$rayCast_wallJump.target_position.x = ray_cast_dimension
@@ -44,6 +45,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") and right_to_jump():
 		if count_jump == 1:
 			double_jump = true
+			$AudioDoubleJump.play()
+		else:
+			$AudioJump.play()	
 		count_jump += 1
 		
 		#print(count_jump)
@@ -80,10 +84,12 @@ func decide_animation():
 	if direction < 0:
 		$animacionesFrog.flip_h = true
 		$rayCast_wallJump.target_position.x = -ray_cast_dimension
+
 		#print($rayCast_wallJump.target_position.x)
 	elif direction > 0:
 		$animacionesFrog.flip_h = false
 		$rayCast_wallJump.target_position.x = ray_cast_dimension
+
 		#print($rayCast_wallJump.target_position.x)
 
 	#print("permitir salto: ", allow_animation)
@@ -123,7 +129,9 @@ func collectFruit(fruitType: String):
 	print("Recolete: ", fruitType, " variable: auxString: ", auxString, " Valor: ", GeneralRules[auxString])
 	var gainedPoint = GeneralRules[auxString]
 	fruitCount += gainedPoint
+	$AudioDoubleJump.play()
 	print("Puntos recolectados: ",fruitCount)
+	
 
 	
 func right_to_jump():
@@ -140,9 +148,10 @@ func right_to_jump():
 # Señales 
 ################
 func _on_animaciones_frog_animation_finished():
-	#print($animacionesFrog.animation)
-	if $animacionesFrog.animation == "appear" || $animacionesFrog.animation == "double_jump":
+	print("fINALIZAR ANIMACIÓN:" , $animacionesFrog.animation)
+	if $animacionesFrog.animation == "appear" || $animacionesFrog.animation == "double_jump" || $animacionesFrog.animation == "hit":
 		allow_animation = true # Replace with function body.
+	
 
 func _on_coyote_timer_timeout():
 	#print("Inicio contador boom!")
@@ -153,5 +162,13 @@ func _on_damage_detection_area_shape_entered(area_rid, area, area_shape_index, l
 	#print(area_rid)
 	print(area.name) # muestra el nombre del area que collisiono
 	if area.name != "area_collect_fruit":
+		print("ANIMACIÓN:" , $animacionesFrog.animation)
+		allow_animation = false
+		$AudioDamage.play()
+		velocity.y = -250
+		$animacionesFrog.play("hit")
 		healt -= 10
 	print("Daño detectado: ", healt)
+
+
+
